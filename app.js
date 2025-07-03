@@ -1,6 +1,7 @@
 var port = process.env.PORT || 3000,
   http = require("http"),
   fs = require("fs"),
+  path = require("path"),
   html = fs.readFileSync("index.html");
 
 var log = function (entry) {
@@ -34,9 +35,24 @@ var server = http.createServer(function (req, res) {
       res.end();
     });
   } else {
-    res.writeHead(200);
-    res.write(html);
-    res.end();
+    // Handle static file requests
+    if (req.url === "/styles.css") {
+      try {
+        var css = fs.readFileSync("styles.css", "utf8");
+        res.writeHead(200, { "Content-Type": "text/css" });
+        res.write(css);
+        res.end();
+      } catch (err) {
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.write("CSS file not found");
+        res.end();
+      }
+    } else {
+      // Default to serving index.html
+      res.writeHead(200);
+      res.write(html);
+      res.end();
+    }
   }
 });
 
