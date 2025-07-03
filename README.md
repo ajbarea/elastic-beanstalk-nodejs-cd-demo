@@ -14,12 +14,14 @@ This project showcases a simple Node.js web application designed to run on AWS E
 ## 📁 Project Structure
 
 ```text
-├── app.js          # Main Node.js application server
-├── index.html      # Frontend HTML page
-├── styles.css      # CSS styling for the web interface
-├── package.json    # Node.js dependencies and scripts
-├── cron.yaml       # Scheduled task configuration
-└── README.md       # This file
+├── .ebextensions/         # Elastic Beanstalk configuration
+│   └── logging.config     # Log collection configuration
+├── app.js                 # Main Node.js application server
+├── index.html             # Frontend HTML page
+├── styles.css             # CSS styling for the web interface
+├── package.json           # Node.js dependencies and scripts
+├── cron.yaml              # Scheduled task configuration
+└── README.md              # This file
 ```
 
 ## 🛠️ Features
@@ -41,6 +43,7 @@ This project showcases a simple Node.js web application designed to run on AWS E
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/` | Serves the main HTML page |
+| GET | `/styles.css` | Serves the CSS stylesheet |
 | POST | `/` | Logs received messages |
 | POST | `/scheduled` | Handles scheduled cron tasks |
 
